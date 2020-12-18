@@ -6,7 +6,7 @@
 **Возможности:**
 
 1) Парсер принимает ссылки по городам/по машинам формата:
-https://kolesa.kz/cars/almaty/ https://kolesa.kz/cars/toyota/
+https://kolesa.kz/cars/almaty/ или https://kolesa.kz/cars/toyota/
 2) Парсер собирает данные по объявлению: город/машина/цена/ссылка/номер телефона
 3) Данные записываеются в формат csv
 4) Поддержка pool multiprocces
