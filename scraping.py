@@ -1,9 +1,10 @@
 # -*- coding: utf8 -*-
+import sys
 import re
 import csv
 import requests
 from bs4 import BeautifulSoup
-from multiprocessing import Pool
+from multiprocessing import Pool, cpu_count
 from datetime import datetime
 from fake_useragent import UserAgent
 
@@ -48,7 +49,7 @@ def make_all(pattern: str):
     get_data(get_page(pattern))
 
 
-def main(pattern, threads=10):
+def main(pattern, threads=cpu_count()):
     pattern += '?page={}'
     last_page = get_page(pattern).select('.pager')[0].find_all('li')[-1].get_text(strip=True)
     urls = [pattern.format(str(i)) for i in range(1, int(last_page) + 1)]
@@ -58,5 +59,7 @@ def main(pattern, threads=10):
 
 
 if __name__ == '__main__':
-    url = 'https://kolesa.kz/cars/suv/avtokredit/toyota/land-cruiser/'
-    main(url)
+    if len(sys.argv) == 3:
+        main(sys.argv[1], int(sys.argv[2]))
+    else:
+        main(sys.argv[1])
